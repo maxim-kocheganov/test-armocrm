@@ -1,11 +1,20 @@
 from telethon.sync import TelegramClient, events
-from settings import api_id, api_hash
-with TelegramClient('name', api_id, api_hash) as client:
-   client.send_message('me', 'Hello, myself!')
-   print(client.download_profile_photo('me'))
+from telethon.tl.functions.channels import JoinChannelRequest
 
-   @client.on(events.NewMessage(pattern='(?i).*Hello'))
-   async def handler(event):
-      await event.reply('Hey!')
+from settings import api_id, api_hash
+
+with TelegramClient('name', api_id, api_hash) as client:
+   # Get entity of channel
+   channel = client.get_entity('https://t.me/market_marketplace')
+   # Subscribe
+   #client(JoinChannelRequest(channel))
+   # Read
+   count = 10
+   for message in client.iter_messages(channel):
+      print(message.sender_id, ':', message.text)
+      if count == 0:
+         break
+      count -= 1
+        
 
    client.run_until_disconnected()

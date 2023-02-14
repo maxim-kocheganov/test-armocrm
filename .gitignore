@@ -130,3 +130,5 @@ dmypy.json
 
 # Settings - api prevent leakage
 settings.py
+*.session
+*.session-journal
