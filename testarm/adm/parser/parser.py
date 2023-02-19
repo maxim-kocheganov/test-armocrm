@@ -1,5 +1,4 @@
-from telethon.sync import TelegramClient, events
-from telethon.tl.functions.channels import JoinChannelRequest
+from telethon.sync import TelegramClient
 
 from .settings import api_id, api_hash
 
@@ -8,9 +7,6 @@ def getPostsFromTG(channelInText):
    with TelegramClient('dev', api_id, api_hash) as client:      
       # Get entity of channel
       channel = client.get_entity(channelInText)
-      # Subscribe
-      #client(JoinChannelRequest(channel))
-      # Read
       count = 10
       for message in client.iter_messages(channel):
          # print(message.sender_id, ':', message.text)
@@ -21,5 +17,5 @@ def getPostsFromTG(channelInText):
    return posts
 
 if __name__ == "__main__":
-   with TelegramClient('dev', api_id, api_hash) as client:
+   with TelegramClient('dev', api_id, api_hash) as client: # Login from console
       pass
